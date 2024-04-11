@@ -1,0 +1,31 @@
+<html>
+<header>
+    <title>LINEログインページ</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</header>
+
+<body>
+    <h1>LINEログインページ</h1>
+    <a href="./index.html">TOPページへ</a>
+    <script>
+    setTimeout(() => {
+        liff
+            .init({
+                liffId: '{チャネルを表す10桁の数値}-{LIFFアプリを表す8文字の英数字}',
+                withLoginOnExternalBrowser: true,
+            })
+            .then(async() => {
+                const idToken = liff.getIDToken();
+                window.alert(`idToken: ${idToken}`);
+                let div = document.createElement("div")
+                div.append(idToken)
+                document.body.append(div)
+            })
+            .catch((err) => {
+                console.log(err.code,err.message)
+            });
+    }, 1000);
+    </script>
+</body>
+
+</html>
